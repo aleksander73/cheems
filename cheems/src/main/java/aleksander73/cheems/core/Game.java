@@ -2,11 +2,32 @@ package aleksander73.cheems.core;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import aleksander73.cheems.scene.Scene;
 import aleksander73.cheems.time.Time;
 import aleksander73.cheems.time.Timer;
+import aleksander73.cheems.utility.ListUtility;
+import aleksander73.cheems.utility.functional_interface.Condition;
 
-public class Game {
+public abstract class Game {
     private volatile boolean running = false;
+    private List<Scene> scenes = new ArrayList<>();
+    private final Condition<GameObject> isActive = new Condition<GameObject>() {
+        @Override
+        public boolean test(GameObject element) {
+            return element.isActive();
+        }
+    };
+
+    public Game() {
+        Scene scene = this.buildScene();
+        scenes.add(scene);
+        Scene.setCurrentScene(scene);
+    }
+
+    protected abstract Scene buildScene();
 
     public void run() {
         final int FPS = 60;
@@ -22,6 +43,7 @@ public class Game {
             long elapsedTime = timer.elapsedTimeNano();
             if(elapsedTime > 1000000000L / FPS) {
                 this.update();
+                Scene.getCurrentScene().onUpdated();
                 Time.setDeltaTime(elapsedTime);
                 timer.restart();
                 frames++;
@@ -36,9 +58,17 @@ public class Game {
         framesTimer.stop();
     }
 
-    public void start() {}
+    private void start() {
+        for(GameObject gameObject : ListUtility.filter(Scene.getCurrentScene().getGameObjects(), isActive)) {
+            gameObject.start();
+        }
+    }
 
-    public void update() {}
+    private void update() {
+        for(GameObject gameObject : ListUtility.filter(Scene.getCurrentScene().getGameObjects(), isActive)) {
+            gameObject.update();
+        }
+    }
 
     public void stop() {
         running = false;

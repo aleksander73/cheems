@@ -3,9 +3,13 @@ package aleksander73.cheems.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import aleksander73.cheems.scene.Scene;
+
 public class GameObject implements Script {
     private String name;
     private List<Component> components = new ArrayList<>();
+    private Scene scene;
+    private boolean active = true;
 
     protected GameObject(String name) {
         this.name = name;
@@ -16,6 +20,28 @@ public class GameObject implements Script {
 
     @Override
     public void update() {}
+
+    public static void instantiate(final GameObject gameObject) {
+        final Scene currentScene = Scene.getCurrentScene();
+        currentScene.getOnUpdated().queueRunnable(new Runnable() {
+            @Override
+            public void run() {
+                currentScene.addGameObject(gameObject);
+                gameObject.start();
+            }
+        });
+    }
+
+    public void destroy() {
+        this.setActive(false);
+        final Scene currentScene = Scene.getCurrentScene();
+        currentScene.getOnUpdated().queueRunnable(new Runnable() {
+            @Override
+            public void run() {
+                currentScene.removeGameObject(GameObject.this);
+            }
+        });
+    }
 
     public String getName() {
         return name;
@@ -62,5 +88,21 @@ public class GameObject implements Script {
 
     public <T extends Component> void removeComponents(List<Component> components) {
         this.components.removeAll(components);
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
