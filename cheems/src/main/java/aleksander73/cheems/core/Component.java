@@ -3,6 +3,8 @@ package aleksander73.cheems.core;
 public class Component {
     private GameObject gameObject;
 
+    public void initialize() {}
+
     public GameObject getGameObject() {
         return gameObject;
     }
