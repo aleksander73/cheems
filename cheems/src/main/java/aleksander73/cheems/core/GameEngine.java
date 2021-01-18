@@ -4,11 +4,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameEngine {
-    private Game currentGame;
+    private Game game;
     private Timer gameTimer;
 
     public void startGame(final Game game) {
-        this.currentGame = game;
+        this.game = game;
         gameTimer = new Timer();
         gameTimer.schedule(new TimerTask() {
             @Override
@@ -19,11 +19,11 @@ public class GameEngine {
     }
 
     public void shutdown() {
-        currentGame.stop();
+        game.stop();
         gameTimer.cancel();
     }
 
-    public Game getCurrentGame() {
-        return currentGame;
+    public Game getGame() {
+        return game;
     }
 }
