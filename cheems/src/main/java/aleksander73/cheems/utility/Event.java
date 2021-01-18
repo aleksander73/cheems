@@ -14,4 +14,8 @@ public class Event {
     public void queueRunnable(Runnable runnable) {
         runnables.add(runnable);
     }
+
+    public void clear() {
+        runnables.clear();
+    }
 }

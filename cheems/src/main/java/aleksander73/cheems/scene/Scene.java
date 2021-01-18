@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import aleksander73.cheems.core.GameObject;
+import aleksander73.cheems.utility.Event;
 import aleksander73.cheems.utility.ListUtility;
 import aleksander73.cheems.utility.functional_interface.Condition;
 
 public class Scene {
     private List<GameObject> gameObjects = new ArrayList<>();
+    private Event onUpdated = new Event();
     private static Scene currentScene;
 
     public Scene(List<GameObject> gameObjects) {
@@ -37,6 +39,15 @@ public class Scene {
 
     public void removeGameObject(GameObject gameObject) {
         gameObjects.remove(gameObject);
+    }
+
+    public Event getOnUpdated() {
+        return onUpdated;
+    }
+
+    public void onUpdated() {
+        onUpdated.fire();
+        onUpdated.clear();
     }
 
     public static Scene getCurrentScene() {

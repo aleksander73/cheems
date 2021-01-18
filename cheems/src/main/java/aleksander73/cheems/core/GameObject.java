@@ -20,6 +20,27 @@ public class GameObject implements Script {
     @Override
     public void update() {}
 
+    public static void instantiate(final GameObject gameObject) {
+        final Scene currentScene = Scene.getCurrentScene();
+        currentScene.getOnUpdated().queueRunnable(new Runnable() {
+            @Override
+            public void run() {
+                currentScene.addGameObject(gameObject);
+                gameObject.start();
+            }
+        });
+    }
+
+    public void destroy() {
+        final Scene currentScene = Scene.getCurrentScene();
+        currentScene.getOnUpdated().queueRunnable(new Runnable() {
+            @Override
+            public void run() {
+                currentScene.removeGameObject(GameObject.this);
+            }
+        });
+    }
+
     public String getName() {
         return name;
     }

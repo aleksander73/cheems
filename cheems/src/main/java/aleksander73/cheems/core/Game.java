@@ -2,11 +2,24 @@ package aleksander73.cheems.core;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import aleksander73.cheems.scene.Scene;
 import aleksander73.cheems.time.Time;
 import aleksander73.cheems.time.Timer;
 
-public class Game {
+public abstract class Game {
     private volatile boolean running = false;
+    private List<Scene> scenes = new ArrayList<>();
+
+    public Game() {
+        Scene scene = this.buildScene();
+        scenes.add(scene);
+        Scene.setCurrentScene(scene);
+    }
+
+    protected abstract Scene buildScene();
 
     public void run() {
         final int FPS = 60;
@@ -22,6 +35,7 @@ public class Game {
             long elapsedTime = timer.elapsedTimeNano();
             if(elapsedTime > 1000000000L / FPS) {
                 this.update();
+                Scene.getCurrentScene().onUpdated();
                 Time.setDeltaTime(elapsedTime);
                 timer.restart();
                 frames++;
