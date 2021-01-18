@@ -9,6 +9,7 @@ public class GameObject implements Script {
     private String name;
     private List<Component> components = new ArrayList<>();
     private Scene scene;
+    private boolean active = true;
 
     protected GameObject(String name) {
         this.name = name;
@@ -32,6 +33,7 @@ public class GameObject implements Script {
     }
 
     public void destroy() {
+        this.setActive(false);
         final Scene currentScene = Scene.getCurrentScene();
         currentScene.getOnUpdated().queueRunnable(new Runnable() {
             @Override
@@ -94,5 +96,13 @@ public class GameObject implements Script {
 
     public void setScene(Scene scene) {
         this.scene = scene;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
