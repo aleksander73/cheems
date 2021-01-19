@@ -36,7 +36,7 @@ public class RenderingSystem extends System {
         }
     }
 
-    public void requestRender() {
+    public static void requestRender() {
         surfaceView.requestRender();
     }
 

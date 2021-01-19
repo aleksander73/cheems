@@ -5,6 +5,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import aleksander73.cheems.rendering.RenderingSystem;
+import aleksander73.cheems.rendering.renderers.Renderer;
 import aleksander73.cheems.scene.Scene;
 import aleksander73.cheems.time.Time;
 import aleksander73.cheems.time.Timer;
@@ -44,6 +46,7 @@ public abstract class Game {
             if(elapsedTime > 1000000000L / FPS) {
                 this.update();
                 Scene.getCurrentScene().onUpdated();
+                RenderingSystem.requestRender();
                 Time.setDeltaTime(elapsedTime);
                 timer.restart();
                 frames++;
@@ -70,7 +73,22 @@ public abstract class Game {
         }
     }
 
-    public void render() {}
+    public void render() {
+        List<GameObject> gameObjects = Scene.getCurrentScene().getGameObjects();
+        List<Renderer> renderers = new ArrayList<>();
+        for(int i = 0; i < gameObjects.size(); i++) {
+            renderers.addAll(gameObjects.get(i).getComponents(Renderer.class));
+        }
+        List<Renderer> activeRenderers = ListUtility.filter(renderers, new Condition<Renderer>() {
+            @Override
+            public boolean test(Renderer renderer) {
+                return renderer.isActive();
+            }
+        });
+        for(Renderer renderer : activeRenderers) {
+            renderer.render();
+        }
+    }
 
     public void stop() {
         running = false;
