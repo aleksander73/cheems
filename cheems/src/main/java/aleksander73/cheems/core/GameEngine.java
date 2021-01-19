@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aleksander73.cheems.assets.ResourceManager;
 import aleksander73.cheems.rendering.RenderingSystem;
 import aleksander73.cheems.rendering.SurfaceView;
 import aleksander73.cheems.utility.Event;
@@ -24,6 +25,7 @@ public class GameEngine {
         systems.addAll(Arrays.asList(
             new RenderingSystem(this, surfaceView)
         ));
+        ResourceManager.getInstance().initialize(activity.getAssets());
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
