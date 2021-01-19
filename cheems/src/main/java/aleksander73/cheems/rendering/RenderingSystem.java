@@ -27,7 +27,13 @@ public class RenderingSystem extends System {
 
     public void setViewport(int width, int height) {
         GLES20.glViewport(0, 0, width, height);
-
+        Camera activeCamera = Camera.getActiveCamera();
+        if(activeCamera == null) {
+            Camera defaultCamera = new Camera(width, height, 45.0f, 0.1f, 1000.0f);
+            Camera.setActiveCamera(defaultCamera);
+        } else {
+            activeCamera.setViewport(width, height);
+        }
     }
 
     public void requestRender() {
