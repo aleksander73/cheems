@@ -1,16 +1,24 @@
 package aleksander73.cheems.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import aleksander73.cheems.rendering.RenderingSystem;
 import aleksander73.cheems.utility.Event;
 
 public class GameEngine {
     private Event onInitialized = new Event();
+    private List<System> systems = new ArrayList<>();
     private Game game;
     private Timer gameTimer;
 
     public GameEngine() {
+        systems.addAll(Arrays.asList(
+            new RenderingSystem(this)
+        ));
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -24,6 +32,11 @@ public class GameEngine {
     }
 
     private boolean initialized() {
+        for(System system : systems) {
+            if(!system.isReady()) {
+                return false;
+            }
+        }
         return true;
     }
 
