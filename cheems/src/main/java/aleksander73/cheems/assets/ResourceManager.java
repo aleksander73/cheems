@@ -1,9 +1,11 @@
 package aleksander73.cheems.assets;
 
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.util.Log;
@@ -28,6 +30,7 @@ import aleksander73.math.linear_algebra.Vector3d;
 public class ResourceManager {
     private static ResourceManager instance;
     private AssetManager assetManager;
+    private static MediaPlayer mediaPlayer = new MediaPlayer();;
 
     private Map<String, String> shaders = new HashMap<>();
     private Map<String, Mesh> meshes = new HashMap<>();
@@ -214,5 +217,23 @@ public class ResourceManager {
         meshes.put(filepath, mesh);
 
         return mesh;
+    }
+
+    public void playSound(final String filepath, boolean loop) {
+        mediaPlayer = new MediaPlayer();
+        try {
+            AssetFileDescriptor afd = assetManager.openFd("sounds/" + filepath);
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            afd.close();
+            mediaPlayer.prepare();
+            mediaPlayer.setLooping(loop);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mediaPlayer.start();
+    }
+
+    public static MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
     }
 }
