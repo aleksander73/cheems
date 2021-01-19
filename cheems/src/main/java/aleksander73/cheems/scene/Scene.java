@@ -1,7 +1,11 @@
 package aleksander73.cheems.scene;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import aleksander73.cheems.core.GameObject;
 import aleksander73.cheems.utility.Event;
@@ -16,6 +20,30 @@ public class Scene {
     public Scene(List<GameObject> gameObjects) {
         for(GameObject gameObject : gameObjects) {
             this.addGameObject(gameObject);
+        }
+    }
+
+    /**
+     * @param conditions - must be mutually exclusive
+     */
+    public void sortByGrouping(List<Condition<GameObject>> conditions, List<Comparator<GameObject>> comparators) {
+        Map<Condition<GameObject>, List<GameObject>> mapConditionToSublist = new HashMap<>();
+        Map<Condition<GameObject>, Comparator<GameObject>> mapConditionToComparator = new HashMap<>();
+        for(int i = 0; i < conditions.size(); i++) {
+            mapConditionToSublist.put(conditions.get(i), new ArrayList<GameObject>());
+            mapConditionToComparator.put(conditions.get(i),comparators.get(i));
+        }
+
+        for(Condition<GameObject> condition : conditions) {
+            List<GameObject> filtered = ListUtility.filter(gameObjects, condition);
+            mapConditionToSublist.get(condition).addAll(filtered);
+        }
+
+        gameObjects.clear();
+        for(Condition<GameObject> condition : conditions) {
+            List<GameObject> sublist = mapConditionToSublist.get(condition);
+            Collections.sort(sublist, mapConditionToComparator.get(condition));
+            gameObjects.addAll(sublist);
         }
     }
 

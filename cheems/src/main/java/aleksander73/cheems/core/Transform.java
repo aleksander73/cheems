@@ -3,6 +3,8 @@ package aleksander73.cheems.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import aleksander73.cheems.rendering.Transformation;
+import aleksander73.math.linear_algebra.Matrix;
 import aleksander73.math.linear_algebra.Quaternion;
 import aleksander73.math.linear_algebra.Vector3d;
 
@@ -105,6 +107,14 @@ public class Transform extends Component {
     public void removeChild(Transform child) {
         children.remove(child);
         child.parent = worldTransform;
+    }
+
+    public Matrix modelMatrix() {
+        Matrix translationMatrix = Transformation.translationMatrix(position);
+        Matrix rotationMatrix = Transformation.rotationMatrix(rotation);
+        Matrix scaleMatrix = Transformation.scaleMatrix(scale);
+
+        return translationMatrix.mul(rotationMatrix).mul(scaleMatrix);
     }
 
     public Transform copy() {
