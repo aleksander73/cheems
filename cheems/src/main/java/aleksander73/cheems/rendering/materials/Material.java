@@ -1,5 +1,6 @@
 package aleksander73.cheems.rendering.materials;
 
+import aleksander73.cheems.assets.ResourceManager;
 import aleksander73.cheems.core.Component;
 import aleksander73.cheems.rendering.shaders.Shader;
 
@@ -10,7 +11,7 @@ public class Material extends Component {
 
     public Material(Colour colour, Texture texture, Shader shader) {
         this.colour = (colour != null) ? colour : Colour.DEFAULT;
-        this.texture = texture;
+        this.texture = (texture != null) ? texture : ResourceManager.getInstance().getDefaultTex();;
         this.shader = shader;
     }
 
