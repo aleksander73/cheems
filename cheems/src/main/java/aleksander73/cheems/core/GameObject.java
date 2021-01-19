@@ -3,6 +3,7 @@ package aleksander73.cheems.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import aleksander73.cheems.rendering.renderers.Renderer;
 import aleksander73.cheems.scene.Scene;
 
 public class GameObject implements Script {
@@ -34,6 +35,10 @@ public class GameObject implements Script {
 
     public void destroy() {
         this.setActive(false);
+        Renderer renderer = this.getComponent(Renderer.class);
+        if(renderer != null) {
+            renderer.setActive(false);
+        }
         final Scene currentScene = Scene.getCurrentScene();
         currentScene.getOnUpdated().queueRunnable(new Runnable() {
             @Override
