@@ -4,6 +4,10 @@ import aleksander73.math.linear_algebra.Matrix;
 import aleksander73.math.linear_algebra.Vector3d;
 
 public class Transformation {
+    public static Matrix mvpMatrix(Matrix model, Matrix view, Matrix projection) {
+        return projection.mul(view.mul(model));
+    }
+
     public static Matrix translationMatrix(Vector3d translation) {
         float x = translation.getX();
         float y = translation.getY();
