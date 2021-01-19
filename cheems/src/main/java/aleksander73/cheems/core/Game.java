@@ -24,12 +24,17 @@ public abstract class Game {
     };
 
     public Game() {
+        this.setupInput();
         Scene scene = this.buildScene();
         scenes.add(scene);
         Scene.setCurrentScene(scene);
     }
 
     protected abstract Scene buildScene();
+
+    protected abstract void setupInput();
+
+    protected abstract void clearInput();
 
     public void run() {
         final int FPS = 60;
@@ -45,6 +50,7 @@ public abstract class Game {
             long elapsedTime = timer.elapsedTimeNano();
             if(elapsedTime > 1000000000L / FPS) {
                 this.update();
+                this.clearInput();
                 Scene.getCurrentScene().onUpdated();
                 RenderingSystem.requestRender();
                 Time.setDeltaTime(elapsedTime);
