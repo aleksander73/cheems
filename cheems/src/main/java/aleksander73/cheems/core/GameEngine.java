@@ -1,5 +1,7 @@
 package aleksander73.cheems.core;
 
+import android.app.Activity;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import aleksander73.cheems.rendering.RenderingSystem;
+import aleksander73.cheems.rendering.SurfaceView;
 import aleksander73.cheems.utility.Event;
 
 public class GameEngine {
@@ -15,9 +18,11 @@ public class GameEngine {
     private Game game;
     private Timer gameTimer;
 
-    public GameEngine() {
+    public GameEngine(Activity activity) {
+        SurfaceView surfaceView = new SurfaceView(activity);
+        activity.setContentView(surfaceView);
         systems.addAll(Arrays.asList(
-            new RenderingSystem(this)
+            new RenderingSystem(this, surfaceView)
         ));
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {

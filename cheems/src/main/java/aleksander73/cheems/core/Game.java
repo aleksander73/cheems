@@ -70,6 +70,8 @@ public abstract class Game {
         }
     }
 
+    public void render() {}
+
     public void stop() {
         running = false;
     }
