@@ -1,0 +1,35 @@
+package aleksander73.cheems.rendering.materials;
+
+import aleksander73.cheems.rendering.shaders.Shader;
+
+public class Material {
+    private Colour colour;
+    private Texture texture;
+    private Shader shader;
+
+    public Material(Colour colour, Texture texture, Shader shader) {
+        this.colour = (colour != null) ? colour : Colour.DEFAULT;
+        this.texture = texture;
+        this.shader = shader;
+    }
+
+    public Colour getColour() {
+        return colour;
+    }
+
+    public void setColour(Colour colour) {
+        this.colour = colour;
+    }
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
+
+    public Shader getShader() {
+        return shader;
+    }
+}
