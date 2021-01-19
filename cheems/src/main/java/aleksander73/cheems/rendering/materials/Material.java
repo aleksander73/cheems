@@ -1,8 +1,9 @@
 package aleksander73.cheems.rendering.materials;
 
+import aleksander73.cheems.core.Component;
 import aleksander73.cheems.rendering.shaders.Shader;
 
-public class Material {
+public class Material extends Component {
     private Colour colour;
     private Texture texture;
     private Shader shader;
