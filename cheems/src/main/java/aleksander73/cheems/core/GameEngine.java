@@ -9,6 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import aleksander73.cheems.assets.ResourceManager;
+import aleksander73.cheems.input.InputSystem;
 import aleksander73.cheems.rendering.RenderingSystem;
 import aleksander73.cheems.rendering.SurfaceView;
 import aleksander73.cheems.utility.Event;
@@ -23,7 +24,8 @@ public class GameEngine {
         SurfaceView surfaceView = new SurfaceView(activity);
         activity.setContentView(surfaceView);
         systems.addAll(Arrays.asList(
-            new RenderingSystem(this, surfaceView)
+            new RenderingSystem(this, surfaceView),
+            new InputSystem(this, surfaceView)
         ));
         ResourceManager.getInstance().initialize(activity.getAssets());
         final Timer timer = new Timer();
