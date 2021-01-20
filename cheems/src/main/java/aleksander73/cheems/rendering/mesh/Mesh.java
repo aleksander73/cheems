@@ -6,6 +6,7 @@ import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 import aleksander73.cheems.core.Component;
+import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.rendering.RenderingSystem;
 import aleksander73.cheems.rendering.RenderingUtility;
 import aleksander73.math.linear_algebra.Vector2d;
@@ -50,7 +51,7 @@ public class Mesh extends Component {
         final FloatBuffer vertexBuffer = RenderingUtility.asFloatBuffer(vertexData);
         final ShortBuffer indicesBuffer = RenderingUtility.asShortBuffer(indicesData);
 
-        RenderingSystem.runOnOpenGLThread(new Runnable() {
+        GameEngine.getRenderingSystem().runOnOpenGLThread(new Runnable() {
             @Override
             public void run() {
                 int[] buffers = new int[1];

@@ -2,7 +2,8 @@ package aleksander73.cheems.rendering.shaders;
 
 import android.opengl.GLES20;
 
-import aleksander73.cheems.assets.ResourceManager;
+import aleksander73.cheems.assets.ResourceSystem;
+import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.core.GameObject;
 import aleksander73.cheems.core.Transform;
 import aleksander73.cheems.rendering.RenderingUtility;
@@ -22,8 +23,8 @@ public class GUIShader extends Shader {
 
     public GUIShader() {
         super(
-                ResourceManager.getInstance().loadShader("gui.vs"),
-                ResourceManager.getInstance().loadShader("gui.fs"),
+                GameEngine.getResourceSystem().loadShader("gui.vs"),
+                GameEngine.getResourceSystem().loadShader("gui.fs"),
                 new String[] { MODEL_MATRIX, COLOUR, TEXTURE },
                 new String[] { POSITION, TEXTURE_XY }
         );

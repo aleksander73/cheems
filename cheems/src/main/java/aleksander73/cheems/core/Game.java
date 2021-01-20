@@ -52,7 +52,7 @@ public abstract class Game {
                 this.update();
                 this.clearInput();
                 Scene.getCurrentScene().onUpdated();
-                RenderingSystem.requestRender();
+                GameEngine.getRenderingSystem().requestRender();
                 Time.setDeltaTime(elapsedTime);
                 timer.restart();
                 frames++;

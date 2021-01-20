@@ -2,7 +2,8 @@ package aleksander73.cheems.rendering.shaders;
 
 import android.opengl.GLES20;
 
-import aleksander73.cheems.assets.ResourceManager;
+import aleksander73.cheems.assets.ResourceSystem;
+import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.core.GameObject;
 import aleksander73.cheems.rendering.Camera;
 import aleksander73.cheems.rendering.RenderingUtility;
@@ -23,8 +24,8 @@ public class SkyboxShader extends Shader {
 
     public SkyboxShader() {
         super(
-                ResourceManager.getInstance().loadShader("skybox.vs"),
-                ResourceManager.getInstance().loadShader("skybox.fs"),
+                GameEngine.getResourceSystem().loadShader("skybox.vs"),
+                GameEngine.getResourceSystem().loadShader("skybox.fs"),
                 new String[] {VIEW_CENTER_MATRIX, PROJECTION_MATRIX, COLOUR, TEXTURE },
                 new String[] { POSITION, TEXTURE_XY }
         );
