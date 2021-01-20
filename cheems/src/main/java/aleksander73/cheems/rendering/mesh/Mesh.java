@@ -80,10 +80,10 @@ public class Mesh extends Component {
         float h = height / 2.0f;
 
         Vertex[] vertices = new Vertex[] {
-                new Vertex(0, new Vector3d(-w, -h, 0.0f)),
-                new Vertex(1, new Vector3d(-w, h, 0.0f)),
-                new Vertex(2, new Vector3d(w, h, 0.0f)),
-                new Vertex(3, new Vector3d(w, -h, 0.0f))
+                new Vertex(0, new Vector3d(-w, -h, 0.0f), new Vector2d(0.0f, 1.0f)),
+                new Vertex(1, new Vector3d(-w, h, 0.0f), new Vector2d(0.0f, 0.0f)),
+                new Vertex(2, new Vector3d(w, h, 0.0f), new Vector2d(1.0f, 0.0f)),
+                new Vertex(3, new Vector3d(w, -h, 0.0f), new Vector2d(1.0f, 1.0f))
         };
 
         Face[] faces = new Face[] {
