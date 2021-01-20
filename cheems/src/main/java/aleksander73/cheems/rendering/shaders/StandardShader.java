@@ -2,7 +2,8 @@ package aleksander73.cheems.rendering.shaders;
 
 import android.opengl.GLES20;
 
-import aleksander73.cheems.assets.ResourceManager;
+import aleksander73.cheems.assets.ResourceSystem;
+import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.core.GameObject;
 import aleksander73.cheems.core.Transform;
 import aleksander73.cheems.rendering.Camera;
@@ -25,8 +26,8 @@ public class StandardShader extends Shader {
 
     public StandardShader() {
         super(
-                ResourceManager.getInstance().loadShader("std.vs"),
-                ResourceManager.getInstance().loadShader("std.fs"),
+                GameEngine.getResourceSystem().loadShader("std.vs"),
+                GameEngine.getResourceSystem().loadShader("std.fs"),
                 new String[] { MODEL_MATRIX, VIEW_MATRIX, PROJECTION_MATRIX, COLOUR, TEXTURE },
                 new String[] { POSITION, TEXTURE_XY }
         );

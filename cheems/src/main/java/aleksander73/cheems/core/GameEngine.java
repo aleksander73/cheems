@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import aleksander73.cheems.assets.ResourceManager;
+import aleksander73.cheems.assets.ResourceSystem;
 import aleksander73.cheems.input.InputSystem;
 import aleksander73.cheems.rendering.RenderingSystem;
 import aleksander73.cheems.rendering.SurfaceView;
@@ -16,7 +16,7 @@ import aleksander73.cheems.utility.Event;
 
 public class GameEngine {
     private Event onInitialized = new Event();
-    private List<System> systems = new ArrayList<>();
+    private static final List<System> systems = new ArrayList<>();
     private Game game;
     private Timer gameTimer;
 
@@ -25,9 +25,9 @@ public class GameEngine {
         activity.setContentView(surfaceView);
         systems.addAll(Arrays.asList(
             new RenderingSystem(this, surfaceView),
-            new InputSystem(this, surfaceView)
+            new InputSystem(this, surfaceView),
+            new ResourceSystem(this, activity.getAssets())
         ));
-        ResourceManager.getInstance().initialize(activity.getAssets());
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -67,6 +67,18 @@ public class GameEngine {
 
     public Event getOnInitialized() {
         return onInitialized;
+    }
+
+    public static RenderingSystem getRenderingSystem() {
+        return (RenderingSystem) systems.get(0);
+    }
+
+    public static InputSystem getInputSystem() {
+        return (InputSystem) systems.get(1);
+    }
+
+    public static ResourceSystem getResourceSystem() {
+        return (ResourceSystem) systems.get(2);
     }
 
     public Game getGame() {

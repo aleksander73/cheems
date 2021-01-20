@@ -6,12 +6,12 @@ import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.core.System;
 
 public class RenderingSystem extends System {
-    private static SurfaceView surfaceView;
+    private SurfaceView surfaceView;
 
     public RenderingSystem(GameEngine gameEngine, SurfaceView surfaceView) {
         super(gameEngine);
-        RenderingSystem.surfaceView = surfaceView;
-        RenderingSystem.surfaceView.setRenderingSystem(this);
+        this.surfaceView = surfaceView;
+        this.surfaceView.setRenderingSystem(this);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class RenderingSystem extends System {
         }
     }
 
-    public static void requestRender() {
+    public void requestRender() {
         surfaceView.requestRender();
     }
 
@@ -44,7 +44,7 @@ public class RenderingSystem extends System {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
     }
 
-    public static void runOnOpenGLThread(Runnable runnable) {
+    public void runOnOpenGLThread(Runnable runnable) {
         surfaceView.queueEvent(runnable);
     }
 }

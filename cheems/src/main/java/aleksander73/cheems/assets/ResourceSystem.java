@@ -19,7 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import aleksander73.cheems.rendering.RenderingSystem;
+import aleksander73.cheems.core.GameEngine;
+import aleksander73.cheems.core.System;
 import aleksander73.cheems.rendering.materials.Texture;
 import aleksander73.cheems.rendering.mesh.Face;
 import aleksander73.cheems.rendering.mesh.Mesh;
@@ -27,25 +28,16 @@ import aleksander73.cheems.rendering.mesh.Vertex;
 import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.math.linear_algebra.Vector3d;
 
-public class ResourceManager {
-    private static ResourceManager instance;
+public class ResourceSystem extends System {
     private AssetManager assetManager;
-    private static MediaPlayer mediaPlayer = new MediaPlayer();;
+    private MediaPlayer mediaPlayer = new MediaPlayer();
 
     private Map<String, String> shaders = new HashMap<>();
     private Map<String, Mesh> meshes = new HashMap<>();
     private Map<String, Texture> textures = new HashMap<>();
 
-    private ResourceManager() {}
-
-    public static ResourceManager getInstance() {
-        if(instance == null) {
-            instance = new ResourceManager();
-        }
-        return instance;
-    }
-
-    public void initialize(AssetManager assetManager) {
+    public ResourceSystem(GameEngine gameEngine, AssetManager assetManager) {
+        super(gameEngine);
         this.assetManager = assetManager;
     }
 
@@ -104,7 +96,7 @@ public class ResourceManager {
 
         final boolean[] readyFlag = new boolean[1];
         final boolean[] loadedFlag = new boolean[1];
-        RenderingSystem.runOnOpenGLThread(new Runnable() {
+        GameEngine.getRenderingSystem().runOnOpenGLThread(new Runnable() {
             @Override
             public void run() {
                 Bitmap bitmap = null;
@@ -233,7 +225,7 @@ public class ResourceManager {
         mediaPlayer.start();
     }
 
-    public static MediaPlayer getMediaPlayer() {
+    public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
     }
 }
