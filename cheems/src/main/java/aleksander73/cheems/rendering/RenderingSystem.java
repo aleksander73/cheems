@@ -34,6 +34,7 @@ public class RenderingSystem extends System {
         } else {
             activeCamera.setViewport(width, height);
         }
+        GameEngine.getInputSystem().initScreenToNDCMatrix(width, height);
     }
 
     public void requestRender() {
