@@ -39,6 +39,7 @@ public class ResourceSystem extends System {
     public ResourceSystem(GameEngine gameEngine, AssetManager assetManager) {
         super(gameEngine);
         this.assetManager = assetManager;
+        this.setReady(true);
     }
 
     public String loadShader(final String filepath) {
