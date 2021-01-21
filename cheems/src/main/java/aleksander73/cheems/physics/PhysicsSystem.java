@@ -19,8 +19,8 @@ import aleksander73.math.linear_algebra.Vector3d;
 
 public class PhysicsSystem extends System {
     private final Condition<GameObject> isPhysicalBody;
-    private static final float GRAVITY_SCALE_FACTOR = 0.015f;
-    private static final float g = 9.81f * GRAVITY_SCALE_FACTOR;
+    private float gravityScaleFactor = 1.0f;
+    private final float g = 9.81f * gravityScaleFactor;
 
     private final Condition<GameObject> isCollidable;
     private final Map<GameObject, Vector3d> prevPositions = new HashMap<>();
@@ -107,5 +107,9 @@ public class PhysicsSystem extends System {
         if(pass) {
             collisions.add(collision);
         }
+    }
+
+    public void setGravityScaleFactor(float gravityScaleFactor) {
+        this.gravityScaleFactor = gravityScaleFactor;
     }
 }
