@@ -20,7 +20,7 @@ import aleksander73.math.linear_algebra.Vector3d;
 public class PhysicsSystem extends System {
     private final Condition<GameObject> isPhysicalBody;
     private float gravityScaleFactor = 1.0f;
-    private final float g = 9.81f * gravityScaleFactor;
+    private static final float STANDARD_G = 9.81f;
 
     private final Condition<GameObject> isCollidable;
     private final Map<GameObject, Vector3d> prevPositions = new HashMap<>();
@@ -54,7 +54,7 @@ public class PhysicsSystem extends System {
         for(GameObject gameObject : ListUtility.filter(scene.getGameObjects(), isPhysicalBody)) {
             Rigidbody rigidbody = gameObject.getComponent(Rigidbody.class);
             if(rigidbody.isGravityApplied()) {
-                float deltaVelocity = g * Time.getDeltaTime();
+                float deltaVelocity = this.getG() * Time.getDeltaTime();
                 float newVelocity = rigidbody.getVelocity() + deltaVelocity;
                 rigidbody.setVelocity(newVelocity);
                 Transform transform = gameObject.getComponent(Transform.class);
@@ -111,5 +111,9 @@ public class PhysicsSystem extends System {
 
     public void setGravityScaleFactor(float gravityScaleFactor) {
         this.gravityScaleFactor = gravityScaleFactor;
+    }
+
+    public float getG() {
+        return STANDARD_G * gravityScaleFactor;
     }
 }
