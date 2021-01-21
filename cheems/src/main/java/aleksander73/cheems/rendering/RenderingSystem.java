@@ -6,7 +6,7 @@ import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.core.System;
 
 public class RenderingSystem extends System {
-    private SurfaceView surfaceView;
+    private final SurfaceView surfaceView;
 
     public RenderingSystem(GameEngine gameEngine, SurfaceView surfaceView) {
         super(gameEngine);

@@ -7,14 +7,13 @@ import java.nio.ShortBuffer;
 
 import aleksander73.cheems.core.Component;
 import aleksander73.cheems.core.GameEngine;
-import aleksander73.cheems.rendering.RenderingSystem;
 import aleksander73.cheems.rendering.RenderingUtility;
 import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.math.linear_algebra.Vector3d;
 
 public class Mesh extends Component {
-    private Vertex[] vertices;
-    private Face[] faces;
+    private final Vertex[] vertices;
+    private final Face[] faces;
 
     private int vbo;
     private int ibo;
@@ -62,8 +61,6 @@ public class Mesh extends Component {
                 GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, vertexBuffer.capacity() * RenderingUtility.BYTES_PER_FLOAT, vertexBuffer, GLES20.GL_STATIC_DRAW);
                 GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
 
-                // --------------------------------------------------
-
                 int[] buffers2 = new int[1];
                 GLES20.glGenBuffers(1, buffers2, 0);
                 ibo = buffers2[0];
@@ -78,19 +75,16 @@ public class Mesh extends Component {
     public static Mesh generateGUITexture(float width, float height) {
         float w = width / 2.0f;
         float h = height / 2.0f;
-
         Vertex[] vertices = new Vertex[] {
                 new Vertex(0, new Vector3d(-w, -h, 0.0f), new Vector2d(0.0f, 1.0f)),
                 new Vertex(1, new Vector3d(-w, h, 0.0f), new Vector2d(0.0f, 0.0f)),
                 new Vertex(2, new Vector3d(w, h, 0.0f), new Vector2d(1.0f, 0.0f)),
                 new Vertex(3, new Vector3d(w, -h, 0.0f), new Vector2d(1.0f, 1.0f))
         };
-
         Face[] faces = new Face[] {
                 new Face(new Vertex[] {vertices[0], vertices[1], vertices[2]}),
                 new Face(new Vertex[] {vertices[0], vertices[2], vertices[3]})
         };
-
         return new Mesh(vertices, faces);
     }
 

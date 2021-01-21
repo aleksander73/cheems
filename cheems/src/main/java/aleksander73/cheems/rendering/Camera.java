@@ -34,10 +34,10 @@ public class Camera extends Component {
         Vector3d p = transform.getPosition();
 
         return new Matrix(4, 4, new float[] {
-                1.0f,	0.0f,	0.0f,	-p.getX(),
-                0.0f,	1.0f,	0.0f,	-p.getY(),
-                0.0f,	0.0f,	1.0f,	-p.getZ(),
-                0.0f,	0.0f,	0.0f,	1.0f
+            1.0f,	0.0f,	0.0f,	-p.getX(),
+            0.0f,	1.0f,	0.0f,	-p.getY(),
+            0.0f,	0.0f,	1.0f,	-p.getZ(),
+            0.0f,	0.0f,	0.0f,	1.0f
         });
     }
 
@@ -48,10 +48,10 @@ public class Camera extends Component {
         Vector3d f = transform.getForward();
 
         return new Matrix(4, 4, new float[] {
-                r.getX(),	r.getY(),	r.getZ(),	0.0f,
-                u.getX(),	u.getY(),	u.getZ(),	0.0f,
-                f.getX(),	f.getY(),	f.getZ(),	0.0f,
-                0.0f,		0.0f,		0.0f,		1.0f
+            r.getX(),	r.getY(),	r.getZ(),	0.0f,
+            u.getX(),	u.getY(),	u.getZ(),	0.0f,
+            f.getX(),	f.getY(),	f.getZ(),	0.0f,
+            0.0f,		0.0f,		0.0f,		1.0f
         });
     }
 
@@ -66,10 +66,10 @@ public class Camera extends Component {
         float m32 = 1.0f;
 
         return new Matrix(4, 4, new float[] {
-                m00,	0.0f,	0.0f,	0.0f,
-                0.0f,	m11,	0.0f,	0.0f,
-                0.0f,	0.0f,	m22,	m23,
-                0.0f,	0.0f,	m32,	0.0f
+            m00,	0.0f,	0.0f,	0.0f,
+            0.0f,	m11,	0.0f,	0.0f,
+            0.0f,	0.0f,	m22,	m23,
+            0.0f,	0.0f,	m32,	0.0f
         });
     }
 

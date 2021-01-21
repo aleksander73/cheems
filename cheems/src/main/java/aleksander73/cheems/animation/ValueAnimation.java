@@ -1,6 +1,6 @@
 package aleksander73.cheems.animation;
 
-import androidx.arch.core.util.Function;
+import aleksander73.cheems.utility.functional_interface.Function;
 
 public class ValueAnimation<O> extends Animation {
     private Function<Float, O> f;
@@ -15,7 +15,7 @@ public class ValueAnimation<O> extends Animation {
     }
 
     public O value() {
-        return f.apply(this.getT());
+        return f.accept(this.getT());
     }
 
     public void setF(Function<Float, O> f) {

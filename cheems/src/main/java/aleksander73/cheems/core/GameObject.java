@@ -8,7 +8,7 @@ import aleksander73.cheems.scene.Scene;
 
 public class GameObject implements Script {
     private String name;
-    private List<Component> components = new ArrayList<>();
+    private final List<Component> components = new ArrayList<>();
     private Scene scene;
     private boolean active = true;
 
@@ -52,11 +52,11 @@ public class GameObject implements Script {
         return name;
     }
 
-    public <T extends Component> T getComponent(Class<T> type) {
-        T result = null;
+    public <E extends Component> E getComponent(Class<E> type) {
+        E result = null;
         for(Component component : components) {
             if(type.isInstance(component)) {
-                result = (T)component;
+                result = (E)component;
                 break;
             }
         }
@@ -64,11 +64,11 @@ public class GameObject implements Script {
         return result;
     }
 
-    public <T extends Component> List<T> getComponents(Class<T> type) {
-        List<T> result = new ArrayList<>();
+    public <E extends Component> List<E> getComponents(Class<E> type) {
+        List<E> result = new ArrayList<>();
         for(Component component : components) {
             if(type.isInstance(component)) {
-                result.add((T)component);
+                result.add((E)component);
             }
         }
 

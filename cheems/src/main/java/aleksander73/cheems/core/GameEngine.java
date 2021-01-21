@@ -15,7 +15,7 @@ import aleksander73.cheems.rendering.SurfaceView;
 import aleksander73.cheems.utility.Event;
 
 public class GameEngine {
-    private Event onInitialized = new Event();
+    private final Event onInitialized = new Event();
     private static final List<System> systems = new ArrayList<>();
     private Game game;
     private Timer gameTimer;

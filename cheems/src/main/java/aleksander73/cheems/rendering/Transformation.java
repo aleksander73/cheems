@@ -14,10 +14,10 @@ public class Transformation {
         float z = translation.getZ();
 
         return new Matrix(4, 4, new float[] {
-                1.0f,	0.0f,	0.0f,	x,
-                0.0f,	1.0f,	0.0f,	y,
-                0.0f,	0.0f,	1.0f,	z,
-                0.0f,	0.0f,	0.0f,	1.0f
+            1.0f,	0.0f,	0.0f,	x,
+            0.0f,	1.0f,	0.0f,	y,
+            0.0f,	0.0f,	1.0f,	z,
+            0.0f,	0.0f,	0.0f,	1.0f
         });
     }
 
@@ -34,22 +34,22 @@ public class Transformation {
         float cosZ = (float)Math.cos(radZ);
 
         Matrix x = new Matrix(4, 4, new float[] {
-                1.0f,	0.0f,	0.0f,	0.0f,
-                0.0f,	cosX,  -sinX,	0.0f,
-                0.0f,	sinX,	cosX,	0.0f,
-                0.0f,	0.0f,	0.0f,	1.0f
+            1.0f,	0.0f,	0.0f,	0.0f,
+            0.0f,	cosX,  -sinX,	0.0f,
+            0.0f,	sinX,	cosX,	0.0f,
+            0.0f,	0.0f,	0.0f,	1.0f
         });
         Matrix y = new Matrix(4, 4, new float[] {
-                cosY,	0.0f,	sinY,	0.0f,
-                0.0f,	1.0f,	0.0f,	0.0f,
-                -sinY,	0.0f,	cosY,	0.0f,
-                0.0f,	0.0f,	0.0f,	1.0f
+            cosY,	0.0f,	sinY,	0.0f,
+            0.0f,	1.0f,	0.0f,	0.0f,
+            -sinY,	0.0f,	cosY,	0.0f,
+            0.0f,	0.0f,	0.0f,	1.0f
         });
         Matrix z = new Matrix(4, 4, new float[] {
-                cosZ,  -sinZ,	0.0f,	0.0f,
-                sinZ,	cosZ,	0.0f,	0.0f,
-                0.0f,	0.0f,	1.0f,	0.0f,
-                0.0f,	0.0f,	0.0f,	1.0f
+            cosZ,  -sinZ,	0.0f,	0.0f,
+            sinZ,	cosZ,	0.0f,	0.0f,
+            0.0f,	0.0f,	1.0f,	0.0f,
+            0.0f,	0.0f,	0.0f,	1.0f
         });
 
         return z.mul(y.mul(x));
@@ -61,10 +61,10 @@ public class Transformation {
         float sZ = scale.getZ();
 
         return new Matrix(4, 4, new float[] {
-                sX,		0.0f,	0.0f,	0.0f,
-                0.0f,	sY,		0.0f,	0.0f,
-                0.0f,	0.0f,	sZ,		0.0f,
-                0.0f,	0.0f,	0.0f,	1.0f
+            sX,		0.0f,	0.0f,	0.0f,
+            0.0f,	sY,		0.0f,	0.0f,
+            0.0f,	0.0f,	sZ,		0.0f,
+            0.0f,	0.0f,	0.0f,	1.0f
         });
     }
 }

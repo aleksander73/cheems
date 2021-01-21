@@ -4,7 +4,7 @@ import aleksander73.math.linear_algebra.Vector4d;
 
 public class Colour {
     public static final Colour DEFAULT = new Colour(255, 255, 255, 255);
-    private Vector4d rgba;
+    private final Vector4d rgba;
 
     public Colour(int red, int green, int blue, int alpha) {
         rgba = new Vector4d(red, green, blue, alpha);

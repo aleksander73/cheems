@@ -49,7 +49,6 @@ public class Transform extends Component {
                 .add(reference.up.mul(v.getY()))
                 .add(reference.back.mul(v.getZ()))
                 .toVector3d();
-
         for(Transform child : children) {
             child.translate(reference, v);
         }
@@ -113,7 +112,6 @@ public class Transform extends Component {
         Matrix translationMatrix = Transformation.translationMatrix(position);
         Matrix rotationMatrix = Transformation.rotationMatrix(rotation);
         Matrix scaleMatrix = Transformation.scaleMatrix(scale);
-
         return translationMatrix.mul(rotationMatrix).mul(scaleMatrix);
     }
 

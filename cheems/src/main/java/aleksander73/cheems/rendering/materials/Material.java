@@ -1,6 +1,5 @@
 package aleksander73.cheems.rendering.materials;
 
-import aleksander73.cheems.assets.ResourceSystem;
 import aleksander73.cheems.core.Component;
 import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.rendering.shaders.Shader;
