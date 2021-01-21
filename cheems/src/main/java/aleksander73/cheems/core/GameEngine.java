@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import aleksander73.cheems.assets.ResourceSystem;
 import aleksander73.cheems.input.InputSystem;
+import aleksander73.cheems.physics.PhysicsSystem;
 import aleksander73.cheems.rendering.RenderingSystem;
 import aleksander73.cheems.rendering.SurfaceView;
 import aleksander73.cheems.utility.Event;
@@ -26,6 +27,7 @@ public class GameEngine {
         systems.addAll(Arrays.asList(
             new RenderingSystem(this, surfaceView),
             new InputSystem(this, surfaceView),
+            new PhysicsSystem(this),
             new ResourceSystem(this, activity.getAssets())
         ));
         final Timer timer = new Timer();
@@ -77,8 +79,12 @@ public class GameEngine {
         return (InputSystem) systems.get(1);
     }
 
+    public static PhysicsSystem getPhysicsSystem() {
+        return (PhysicsSystem) systems.get(2);
+    }
+
     public static ResourceSystem getResourceSystem() {
-        return (ResourceSystem) systems.get(2);
+        return (ResourceSystem) systems.get(3);
     }
 
     public Game getGame() {

@@ -22,6 +22,9 @@ Cheems is an open source 3d game engine framework for Android written in Java an
 * support for component-based and scripted game objects
 * support for animations
   * value animations
+* physics system
+  * collision detection
+  * gravity simulation
 * resource system
   * mesh loader (custom formatted, example below)
   * texture loader
@@ -44,7 +47,7 @@ The game engine is available as a JitPack package. The following is the instruct
 2. Add the dependencies
     ```
     dependencies {
-        implementation 'com.github.aleksander73:cheems:v1.0'
+        implementation 'com.github.aleksander73:cheems:v1.1'
         implementation 'com.github.aleksander73:math-library-android:v1.0'
     }
     ```
