@@ -11,18 +11,29 @@ import aleksander73.cheems.core.Transform;
 import aleksander73.cheems.physics.collision.Collider;
 import aleksander73.cheems.physics.collision.Collision;
 import aleksander73.cheems.scene.Scene;
+import aleksander73.cheems.time.Time;
 import aleksander73.cheems.utility.ListUtility;
 import aleksander73.cheems.utility.functional_interface.Condition;
 import aleksander73.cheems.utility.functional_interface.Consumer;
 import aleksander73.math.linear_algebra.Vector3d;
 
 public class PhysicsSystem extends System {
+    private final Condition<GameObject> isPhysicalBody;
+    private static final float GRAVITY_SCALE_FACTOR = 0.015f;
+    private static final float g = 9.81f * GRAVITY_SCALE_FACTOR;
+
     private final Condition<GameObject> isCollidable;
     private final Map<GameObject, Vector3d> prevPositions = new HashMap<>();
     private final Queue<Collision> collisions = new Queue<>();
 
     public PhysicsSystem(GameEngine gameEngine) {
         super(gameEngine);
+        isPhysicalBody = new Condition<GameObject>() {
+            @Override
+            public boolean test(GameObject gameObject) {
+                return gameObject.getComponent(Rigidbody.class) != null;
+            }
+        };
         isCollidable = new Condition<GameObject>() {
             @Override
             public boolean test(GameObject gameObject) {
@@ -40,6 +51,17 @@ public class PhysicsSystem extends System {
     }
 
     public void simulatePhysics(Scene scene) {
+        for(GameObject gameObject : ListUtility.filter(scene.getGameObjects(), isPhysicalBody)) {
+            Rigidbody rigidbody = gameObject.getComponent(Rigidbody.class);
+            if(rigidbody.isGravityApplied()) {
+                float deltaVelocity = g * Time.getDeltaTime();
+                float newVelocity = rigidbody.getVelocity() + deltaVelocity;
+                rigidbody.setVelocity(newVelocity);
+                Transform transform = gameObject.getComponent(Transform.class);
+                transform.translate(Vector3d.yUnitVector.negate().mul(newVelocity).toVector3d());
+            }
+        }
+
         for(Collision collision : collisions) {
             GameObject gameObject1 = collision.getGameObject1();
             GameObject gameObject2 = collision.getGameObject2();
