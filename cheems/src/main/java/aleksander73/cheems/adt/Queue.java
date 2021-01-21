@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Queue<E> implements Iterable<E> {
-    private List<E> elements = new ArrayList<>();
+    private final List<E> elements = new ArrayList<>();
 
     @NonNull
     @Override

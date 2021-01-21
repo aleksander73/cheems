@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import aleksander73.cheems.rendering.RenderingSystem;
 import aleksander73.cheems.rendering.renderers.Renderer;
 import aleksander73.cheems.scene.Scene;
 import aleksander73.cheems.time.Time;
@@ -15,7 +14,7 @@ import aleksander73.cheems.utility.functional_interface.Condition;
 
 public abstract class Game {
     private volatile boolean running = false;
-    private List<Scene> scenes = new ArrayList<>();
+    private final List<Scene> scenes = new ArrayList<>();
     private final Condition<GameObject> isActive = new Condition<GameObject>() {
         @Override
         public boolean test(GameObject element) {

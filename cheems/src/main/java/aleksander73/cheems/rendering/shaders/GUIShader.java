@@ -2,7 +2,6 @@ package aleksander73.cheems.rendering.shaders;
 
 import android.opengl.GLES20;
 
-import aleksander73.cheems.assets.ResourceSystem;
 import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.core.GameObject;
 import aleksander73.cheems.core.Transform;
@@ -23,10 +22,10 @@ public class GUIShader extends Shader {
 
     public GUIShader() {
         super(
-                GameEngine.getResourceSystem().loadShader("gui.vs"),
-                GameEngine.getResourceSystem().loadShader("gui.fs"),
-                new String[] { MODEL_MATRIX, COLOUR, TEXTURE },
-                new String[] { POSITION, TEXTURE_XY }
+            GameEngine.getResourceSystem().loadShader("gui.vert"),
+            GameEngine.getResourceSystem().loadShader("gui.frag"),
+            new String[] { MODEL_MATRIX, COLOUR, TEXTURE },
+            new String[] { POSITION, TEXTURE_XY }
         );
     }
 
@@ -50,7 +49,6 @@ public class GUIShader extends Shader {
     @Override
     public void passAttributes() {
         int vbo = this.getShaderInput().getGameObject().getComponent(Mesh.class).getVBO();
-
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vbo);
         GLES20.glVertexAttribPointer(this.getAttribute(POSITION), 3, GLES20.GL_FLOAT, false, Vertex.VERTEX_ELEMENTS * RenderingUtility.BYTES_PER_FLOAT, 0);
         GLES20.glVertexAttribPointer(this.getAttribute(TEXTURE_XY), 2, GLES20.GL_FLOAT, false, Vertex.VERTEX_ELEMENTS * RenderingUtility.BYTES_PER_FLOAT, 12);

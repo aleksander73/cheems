@@ -10,7 +10,7 @@ import aleksander73.cheems.rendering.shaders.Shader;
 import aleksander73.cheems.rendering.shaders.ShaderInput;
 
 public class MeshRenderer extends Renderer {
-    private Mesh mesh;
+    private final Mesh mesh;
 
     public MeshRenderer(Mesh mesh) {
         this.mesh = mesh;
@@ -22,7 +22,6 @@ public class MeshRenderer extends Renderer {
 
         Shader shader = go.getComponent(Material.class).getShader();
         shader.setShaderInput(new ShaderInput(go));
-
         shader.use();
         shader.passUniforms();
         shader.enableAttributes();

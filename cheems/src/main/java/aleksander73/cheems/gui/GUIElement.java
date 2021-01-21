@@ -22,16 +22,13 @@ public class GUIElement extends GameObject {
 
     public GUIElement(String name, Vector2d position, Vector2d dimensions, int layer, Colour colour, Texture texture) {
         super(name);
-
         width = dimensions.getX();
         height = dimensions.getY();
         this.layer = layer;
-
         Transform transform = new Transform(new Vector3d(position.getX(), position.getY(), 0.0f));
         Mesh mesh = Mesh.generateGUITexture(width, height);
         Material material = new Material(colour, texture, Shaders.getGuiShader());
         MeshRenderer meshRenderer = new MeshRenderer(mesh);
-
         this.addComponents(transform, mesh, material, meshRenderer);
     }
 

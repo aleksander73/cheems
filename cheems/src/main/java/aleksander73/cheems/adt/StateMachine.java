@@ -8,8 +8,8 @@ public class StateMachine {
     private Map<String, State> states = new HashMap<>();
     private State currentState;
 
-    private boolean[][] transitions;
-    private Runnable[][] onTransition;
+    private final boolean[][] transitions;
+    private final Runnable[][] onTransition;
 
     public StateMachine(Set<String> stateNames, String currentState) {
         int n = 0;
@@ -89,10 +89,12 @@ public class StateMachine {
             @Override
             public void run() {}
         };
+
         private Runnable action = new Runnable() {
             @Override
             public void run() {}
         };
+        
         private Runnable onExit = new Runnable() {
             @Override
             public void run() {}

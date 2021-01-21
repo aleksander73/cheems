@@ -11,7 +11,7 @@ import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.math.linear_algebra.Vector3d;
 
 public class InputSystem extends System {
-    private SurfaceView surfaceView;
+    private final SurfaceView surfaceView;
     private Matrix screenToNDCMatrix;
 
     public InputSystem(GameEngine gameEngine, SurfaceView surfaceView) {

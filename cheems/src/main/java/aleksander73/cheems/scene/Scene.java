@@ -13,8 +13,8 @@ import aleksander73.cheems.utility.ListUtility;
 import aleksander73.cheems.utility.functional_interface.Condition;
 
 public class Scene {
-    private List<GameObject> gameObjects = new ArrayList<>();
-    private Event onUpdated = new Event();
+    private final List<GameObject> gameObjects = new ArrayList<>();
+    private final Event onUpdated = new Event();
     private static Scene currentScene;
 
     public Scene(List<GameObject> gameObjects) {

@@ -7,7 +7,7 @@ public class Vertex {
     public static final int VERTEX_ELEMENTS = 5;
 
     private final int id;
-    private Vector3d position;
+    private final Vector3d position;
     private Vector2d textureCoord;
 
     public Vertex(int id, Vector3d position) {

@@ -2,7 +2,6 @@ package aleksander73.cheems.rendering.shaders;
 
 import android.opengl.GLES20;
 
-import aleksander73.cheems.assets.ResourceSystem;
 import aleksander73.cheems.core.GameEngine;
 import aleksander73.cheems.core.GameObject;
 import aleksander73.cheems.core.Transform;
@@ -26,10 +25,10 @@ public class StandardShader extends Shader {
 
     public StandardShader() {
         super(
-                GameEngine.getResourceSystem().loadShader("std.vs"),
-                GameEngine.getResourceSystem().loadShader("std.fs"),
-                new String[] { MODEL_MATRIX, VIEW_MATRIX, PROJECTION_MATRIX, COLOUR, TEXTURE },
-                new String[] { POSITION, TEXTURE_XY }
+            GameEngine.getResourceSystem().loadShader("std.vert"),
+            GameEngine.getResourceSystem().loadShader("std.frag"),
+            new String[] { MODEL_MATRIX, VIEW_MATRIX, PROJECTION_MATRIX, COLOUR, TEXTURE },
+            new String[] { POSITION, TEXTURE_XY }
         );
     }
 
@@ -38,19 +37,14 @@ public class StandardShader extends Shader {
         GameObject go = this.getShaderInput().getGameObject();
         Transform transform = go.getComponent(Transform.class);
         Material material = go.getComponent(Material.class);
-
         Matrix modelMatrix = transform.modelMatrix();
         this.setMatrix(MODEL_MATRIX, modelMatrix);
-
         Matrix viewMatrix = Camera.getActiveCamera().viewMatrix();
         this.setMatrix(VIEW_MATRIX, viewMatrix);
-
         Matrix projectionMatrix = Camera.getActiveCamera().projectionMatrix();
         this.setMatrix(PROJECTION_MATRIX, projectionMatrix);
-
         Colour colour = material.getColour();
         this.setVector4d(COLOUR, colour.normalize());
-
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         material.getTexture().bind();
         this.setInteger(TEXTURE, 0);
@@ -59,7 +53,6 @@ public class StandardShader extends Shader {
     @Override
     public void passAttributes() {
         int vbo = this.getShaderInput().getGameObject().getComponent(Mesh.class).getVBO();
-
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vbo);
         GLES20.glVertexAttribPointer(this.getAttribute(POSITION), 3, GLES20.GL_FLOAT, false, Vertex.VERTEX_ELEMENTS * RenderingUtility.BYTES_PER_FLOAT, 0);
         GLES20.glVertexAttribPointer(this.getAttribute(TEXTURE_XY), 2, GLES20.GL_FLOAT, false, Vertex.VERTEX_ELEMENTS * RenderingUtility.BYTES_PER_FLOAT, 12);

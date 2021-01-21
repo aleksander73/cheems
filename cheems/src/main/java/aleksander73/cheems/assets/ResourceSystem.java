@@ -29,12 +29,12 @@ import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.math.linear_algebra.Vector3d;
 
 public class ResourceSystem extends System {
-    private AssetManager assetManager;
+    private final AssetManager assetManager;
     private MediaPlayer mediaPlayer = new MediaPlayer();
 
-    private Map<String, String> shaders = new HashMap<>();
-    private Map<String, Mesh> meshes = new HashMap<>();
-    private Map<String, Texture> textures = new HashMap<>();
+    private final Map<String, String> shaders = new HashMap<>();
+    private final Map<String, Mesh> meshes = new HashMap<>();
+    private final Map<String, Texture> textures = new HashMap<>();
 
     public ResourceSystem(GameEngine gameEngine, AssetManager assetManager) {
         super(gameEngine);
@@ -129,7 +129,7 @@ public class ResourceSystem extends System {
 
         try {
             Thread.sleep(50);
-            while(!readyFlag[0]) {}	// Make sure the runnable from OpenGL thread has finished
+            while(!readyFlag[0]) {}
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
@@ -147,11 +147,8 @@ public class ResourceSystem extends System {
             return mesh;
         }
 
-        // --------------------------------------------------
-
         List<Vertex> vertices = new ArrayList<>();
         List<Face> faces = new ArrayList<>();
-
         try {
             InputStreamReader input = new InputStreamReader(assetManager.open("meshes/" + filepath));
             BufferedReader reader = new BufferedReader(input);
@@ -193,8 +190,6 @@ public class ResourceSystem extends System {
             Log.d("game_engine", "error: Could not load resource \"" + filepath + "\"");
             e.printStackTrace();
         }
-
-        // --------------------------------------------------
 
         Vertex[] vertexArray = new Vertex[vertices.size()];
         for(int i = 0; i < vertices.size(); i++) {
