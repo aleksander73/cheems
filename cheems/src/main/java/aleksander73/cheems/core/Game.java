@@ -48,9 +48,11 @@ public abstract class Game {
         while(running) {
             long elapsedTime = timer.elapsedTimeNano();
             if(elapsedTime > 1000000000L / FPS) {
+                GameEngine.getPhysicsSystem().gatherInformation(Scene.getCurrentScene());
                 this.update();
                 this.clearInput();
                 Scene.getCurrentScene().onUpdated();
+                GameEngine.getPhysicsSystem().simulatePhysics(Scene.getCurrentScene());
                 GameEngine.getRenderingSystem().requestRender();
                 Time.setDeltaTime(elapsedTime);
                 timer.restart();
