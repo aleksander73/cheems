@@ -47,7 +47,7 @@ The game engine is available as a JitPack package. The following is the instruct
 2. Add the dependencies
     ```
     dependencies {
-        implementation 'com.github.aleksander73:cheems:v1.1'
+        implementation 'com.github.aleksander73:cheems:v1.1.1'
         implementation 'com.github.aleksander73:math-library-android:v1.0'
     }
     ```
@@ -57,17 +57,16 @@ The game engine is available as a JitPack package. The following is the instruct
 ## Hello Cheems
 
 1. Open `Android Studio`
-2. Create your Game instance by extending `Game` class
+2. Create your game instance by extending `Game` class
 3. Initialize `MainActivity.java` as such
 
     ```java
     public class MainActivity extends AppCompatActivity {
-        private GameEngine gameEngine;
+        private final GameEngine gameEngine = new GameEngine();
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            gameEngine = new GameEngine(this);
             gameEngine.getOnInitialized().queueRunnable(new Runnable() {
                 @Override
                 public void run() {
@@ -75,6 +74,7 @@ The game engine is available as a JitPack package. The following is the instruct
                     gameEngine.startGame(myGame);
                 }
             });
+            gameEngine.initialize(this);
         }
 
         @Override
