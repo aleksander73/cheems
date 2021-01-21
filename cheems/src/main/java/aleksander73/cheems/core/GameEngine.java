@@ -21,14 +21,14 @@ public class GameEngine {
     private Game game;
     private Timer gameTimer;
 
-    public GameEngine(Activity activity) {
+    public void initialize(Activity activity) {
         SurfaceView surfaceView = new SurfaceView(activity);
         activity.setContentView(surfaceView);
         systems.addAll(Arrays.asList(
-            new RenderingSystem(this, surfaceView),
-            new InputSystem(this, surfaceView),
-            new PhysicsSystem(this),
-            new ResourceSystem(this, activity.getAssets())
+                new RenderingSystem(this, surfaceView),
+                new InputSystem(this, surfaceView),
+                new PhysicsSystem(this),
+                new ResourceSystem(this, activity.getAssets())
         ));
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
