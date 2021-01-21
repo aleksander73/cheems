@@ -25,10 +25,10 @@ public class GameEngine {
         SurfaceView surfaceView = new SurfaceView(activity);
         activity.setContentView(surfaceView);
         systems.addAll(Arrays.asList(
-                new RenderingSystem(this, surfaceView),
-                new InputSystem(this, surfaceView),
-                new PhysicsSystem(this),
-                new ResourceSystem(this, activity.getAssets())
+            new RenderingSystem(this, surfaceView),
+            new InputSystem(this, surfaceView),
+            new PhysicsSystem(this),
+            new ResourceSystem(this, activity.getAssets())
         ));
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
