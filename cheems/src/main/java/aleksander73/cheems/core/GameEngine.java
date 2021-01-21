@@ -21,20 +21,20 @@ public class GameEngine {
     private Game game;
     private Timer gameTimer;
 
-    public GameEngine(Activity activity) {
+    public void initialize(Activity activity) {
         SurfaceView surfaceView = new SurfaceView(activity);
         activity.setContentView(surfaceView);
         systems.addAll(Arrays.asList(
-            new RenderingSystem(this, surfaceView),
-            new InputSystem(this, surfaceView),
-            new PhysicsSystem(this),
-            new ResourceSystem(this, activity.getAssets())
+                new RenderingSystem(this, surfaceView),
+                new InputSystem(this, surfaceView),
+                new PhysicsSystem(this),
+                new ResourceSystem(this, activity.getAssets())
         ));
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if(GameEngine.this.initialized()) {
+                if(GameEngine.this.isInitialized()) {
                     GameEngine.this.onInitialized.fire();
                     timer.cancel();
                 }
@@ -42,7 +42,7 @@ public class GameEngine {
         }, 0, 50);
     }
 
-    private boolean initialized() {
+    private boolean isInitialized() {
         for(System system : systems) {
             if(!system.isReady()) {
                 return false;
