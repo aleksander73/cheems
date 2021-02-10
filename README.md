@@ -1,10 +1,10 @@
-<h1 align="center">Cheems</h1>
+<h1 align="center">Vector</h1>
 <p align="center">
 	<img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="license">
-	<img src="https://img.shields.io/github/tag/aleksander73/cheems.svg?label=version&style=flat-square" alt="version">
+	<img src="https://img.shields.io/github/tag/aleksander73/vector.svg?label=version&style=flat-square" alt="version">
 </p>
 
-Cheems is an open source 3d game engine framework for Android written in Java and licensed under MIT.
+Vector is an open source 3d game engine framework for Android written in Java and licensed under MIT.
 
 ## Features
 * rendering engine written in OpenGL
@@ -47,14 +47,14 @@ The game engine is available as a JitPack package. The following is the instruct
 2. Add the dependencies
     ```
     dependencies {
-        implementation 'com.github.aleksander73:cheems:v1.1.1'
+        implementation 'com.github.aleksander73:vector:v1.1.1'
         implementation 'com.github.aleksander73:math-library-android:v1.0'
     }
     ```
 
 3. Synchronize Gradle files in Android Studio, i.e. click `File` > `Sync Project with Gradle Files`
 
-## Hello Cheems
+## Hello Vector
 
 1. Open `Android Studio`
 2. Create your game instance by extending `Game` class
