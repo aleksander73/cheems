@@ -47,7 +47,7 @@ The game engine is available as a JitPack package. The following is the instruct
 2. Add the dependencies
     ```
     dependencies {
-        implementation 'com.github.aleksander73:vector:v1.1.1'
+        implementation 'com.github.aleksander73:vector:v1.1.2'
         implementation 'com.github.aleksander73:math-library-android:v1.0'
     }
     ```
